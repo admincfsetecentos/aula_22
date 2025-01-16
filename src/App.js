@@ -1,31 +1,33 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/home';
 import About from './components/about';
-import Section1 from './components/section1';
-import Section2 from './components/section2';
-import History from './components/history';
-import Team from './components/team';
+import News from './components/news';      // Componente principal de notícias
+import Article from './components/article'; // Componente filho 1
+import Update from './components/update';   // Componente filho 2
 
 function App() {
   return (
     <Router>
+      <nav>
+        <ul>
+          <li><Link to="/">Página Inicial</Link></li>
+          <li><Link to="/about">Sobre</Link></li>
+          <li><Link to="/news">Notícias</Link></li>
+          <li><Link to="/news/article">Última Notícia</Link></li>
+          <li><Link to="/news/update">Atualização</Link></li>
+        </ul>
+      </nav>
+
       <Routes>
-        {/* Rota principal */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         
-        {/* Sub-rotas para Home */}
-        <Route path="/home" element={<Home />}>
-          <Route path="section1" element={<Section1 />} />
-          <Route path="section2" element={<Section2 />} />
-        </Route>
-
-        {/* Sub-rotas para About */}
-        <Route path="/about" element={<About />}>
-          <Route path="history" element={<History />} />
-          <Route path="team" element={<Team />} />
+        {/* Rota principal de notícias */}
+        <Route path="/news" element={<News />}>
+          <Route path="article" element={<Article />} />
+          <Route path="update" element={<Update />} />
         </Route>
       </Routes>
     </Router>
